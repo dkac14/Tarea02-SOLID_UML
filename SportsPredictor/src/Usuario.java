@@ -1,44 +1,37 @@
-public class Pronostico {
-    public Evento evento;
-    private Categoria categoria;
-    private String descripcion;
-    private EstadoPronostico estado;
-    public Usuario usuario;
-    
+public class Usuario {
+    private String nombre;
+    private int puntos;
+    private int ranking;
+    private Notificador notificador;
 
-    public Pronostico(Evento evento, Categoria categoria, String descripcion, Usuario usuario) {
-        this.evento = evento;
-        this.categoria = categoria;
-        this.descripcion = descripcion;
-        this.estado = EstadoPronostico.PENDIENTE;
-        this.usuario = usuario;
+    public Usuario(String nombre, int puntos, Notificador notificador) {
+        this.nombre = nombre;
+        this.puntos = puntos;
+        this.notificador = notificador;
     }
 
-    public Evento getEvento() {return evento;}
+    public String getNombre() { return nombre; }
 
-    public void setEvento(Evento evento) {this.evento = evento;}
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public Categoria getCategoria() {return categoria;}
+    public int getPuntos() { return puntos; }
 
-    public void setCategoria(Categoria categoria) {this.categoria = categoria;}
+    public void setPuntos(int puntos) { this.puntos = puntos; }
 
-    public String getDescripcion() {return descripcion;}
+    public int getRanking() { return ranking; }
 
-    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
+    public void subirRanking() { this.ranking++; }
 
-    public EstadoPronostico getEstado() {return estado;}
+    public Notificador getNotificador() { return notificador; }
 
-    public void setEstado(EstadoPronostico estado) {this.estado = estado;}
+    public void setNotificador(Notificador notificador) { this.notificador = notificador; }
 
-
-    public void comprobarEstadoPronostico(){
-                if(this.getEstado()== EstadoPronostico.ACERTADO){
-                    System.out.println("El pronóstico fue acertado, se agregaran puntos");
-                    int i=this.getEvento().getPuntos();
-                    int j=this.usuario.getPuntos();
-                    this.usuario.setPuntos(j+i);
-                }
-            }
+    public void canjearPuntos(String opcion) {
+        if (opcion.equals("Premio")) {
+            System.out.println("Obtuvo un premio...");
+        } else {
+            System.out.println("Subió de ranking...");
+            subirRanking();
+        }
     }
-
-
+}
