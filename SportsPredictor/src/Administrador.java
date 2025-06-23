@@ -8,5 +8,8 @@ public class Administrador {
         System.out.println("Gestionando políticas de puntaje y recompensa...");
     }
 
-    
+    public void agregarCategoria(String nuevaCategoria) {
+        Categoria.agregarCategoria(nuevaCategoria);
+    }
+
 }
