@@ -9,7 +9,9 @@ public class Reporte {
         this.descripcion = descripcion;
         this.pronosticoInvolucrado = pronosticoInvolucrado;
         this.usuario = usuario;
+        redirigirReporte(this);
     }
 
-    
-}
+    public void redirigirReporte(Reporte reporte) {
+        es.reportes.add(reporte);
+    }
