@@ -1,17 +1,17 @@
 public class Reporte {
     private String descripcion;
     private Pronostico pronosticoInvolucrado;
-    public Usuario usuario;
-    public EquipoServicioTecnico es;
-
+    private Usuario usuario;
 
     public Reporte(String descripcion, Pronostico pronosticoInvolucrado, Usuario usuario) {
         this.descripcion = descripcion;
         this.pronosticoInvolucrado = pronosticoInvolucrado;
         this.usuario = usuario;
-        redirigirReporte(this);
     }
 
-    public void redirigirReporte(Reporte reporte) {
-        es.reportes.add(reporte);
-    }
+    public String getDescripcion() { return descripcion; }
+
+    public Pronostico getPronosticoInvolucrado() { return pronosticoInvolucrado; }
+
+    public Usuario getUsuario() { return usuario; }
+}

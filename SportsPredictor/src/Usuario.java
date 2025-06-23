@@ -1,70 +1,44 @@
-import java.util.ArrayList;
-
-public class Usuario {
-    private String nombre;
-    private int puntos;
-    private int ranking;
-    public ArrayList<Pronostico> pronosticos;
-    private Notificador notificador;
-    public ArrayList<Reporte> reporte;
+public class Pronostico {
+    public Evento evento;
+    private Categoria categoria;
+    private String descripcion;
+    private EstadoPronostico estado;
+    public Usuario usuario;
     
 
-    public Usuario(String nombre, int puntos, ArrayList<Pronostico> pronosticos, Notificador notificador) {
-        this.nombre = nombre;
-        this.puntos = puntos;
-        this.pronosticos = pronosticos;
-        this.notificador = notificador;
+    public Pronostico(Evento evento, Categoria categoria, String descripcion, Usuario usuario) {
+        this.evento = evento;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.estado = EstadoPronostico.PENDIENTE;
+        this.usuario = usuario;
     }
 
-    public String getNombre() {return nombre;}
+    public Evento getEvento() {return evento;}
 
-    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setEvento(Evento evento) {this.evento = evento;}
 
-    public int getPuntos() {return puntos;}
+    public Categoria getCategoria() {return categoria;}
 
-    public void setPuntos(int puntos) {this.puntos = puntos;}
+    public void setCategoria(Categoria categoria) {this.categoria = categoria;}
 
-    public ArrayList<Pronostico> getPronosticos() {return pronosticos;}
+    public String getDescripcion() {return descripcion;}
 
-    public void setPronosticos(ArrayList<Pronostico> pronosticos) {this.pronosticos = pronosticos;}
+    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
-    public Notificador getNotificador() {return notificador;}
+    public EstadoPronostico getEstado() {return estado;}
 
-    public void setNotificador(Notificador notificador) {this.notificador = notificador;}
-
-
-    public void verCalendarioEventos(ArrayList<Evento> eventos) {
-        System.out.println("Calendario de Eventos:");
-
-        for (Evento e : eventos) {
-            if (e.estaAbierto()) {
-                System.out.println("- " + e.getNombre() + " | " + e.getFechaInicio());
-                e.mostrarEstadisticas();
-            }
-        }
-    }
+    public void setEstado(EstadoPronostico estado) {this.estado = estado;}
 
 
-    public void crearPronostico(Evento evento, Categoria categoria, String descripcion) {
-        if (evento.estaAbierto()) {
-            pronosticos.add(new Pronostico(evento, categoria, descripcion, this));
-        }
-    }
-
-
-    public void generarReporte(String descripcion, Pronostico pronostico){
-            if(pronostico.getEstado() == EstadoPronostico.FALLIDO){
-                reporte.add(new Reporte(descripcion, pronostico, this));  
+    public void comprobarEstadoPronostico(){
+                if(this.getEstado()== EstadoPronostico.ACERTADO){
+                    System.out.println("El pronóstico fue acertado, se agregaran puntos");
+                    int i=this.getEvento().getPuntos();
+                    int j=this.usuario.getPuntos();
+                    this.usuario.setPuntos(j+i);
+                }
             }
     }
-    
-    public void canjearPuntos(String opcion){
-        if(opcion.equals("Premio")){
-            System.out.println("Obtuvo un premio...");
-        }else{
-            System.out.println("Subió de ranking...");
-            ranking++;
-        }
-    }
- 
-}
+
+
